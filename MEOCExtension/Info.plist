@@ -36,6 +36,14 @@
 					<key>XCSourceEditorCommandName</key>
 					<string>import sort</string>
 				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
+					<string>SourceEditorCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>$(PRODUCT_BUNDLE_IDENTIFIER).SourceEditorCommandSelectImportSort</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>select import sort</string>
+				</dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>
 			<string>SourceEditorExtension</string>
