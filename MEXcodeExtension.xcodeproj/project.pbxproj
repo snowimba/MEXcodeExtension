@@ -19,6 +19,10 @@
 		586EAEDE2446C9B800655F5C /* SourceEditorExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 586EAEDD2446C9B800655F5C /* SourceEditorExtension.m */; };
 		586EAEE12446C9B800655F5C /* SourceEditorCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 586EAEE02446C9B800655F5C /* SourceEditorCommand.m */; };
 		586EAEE62446C9B800655F5C /* MEOCExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 586EAED92446C9B800655F5C /* MEOCExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AF69958926FD930800DB0413 /* XcodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF69958826FD930800DB0413 /* XcodeKit.framework */; };
+		AF69958A26FD930800DB0413 /* XcodeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AF69958826FD930800DB0413 /* XcodeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AF69958C26FD931000DB0413 /* XcodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF69958826FD930800DB0413 /* XcodeKit.framework */; };
+		AF69958D26FD931000DB0413 /* XcodeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AF69958826FD930800DB0413 /* XcodeKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,28 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AF69958B26FD930800DB0413 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AF69958A26FD930800DB0413 /* XcodeKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AF69958E26FD931000DB0413 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AF69958D26FD931000DB0413 /* XcodeKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +100,7 @@
 		586EAEE02446C9B800655F5C /* SourceEditorCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceEditorCommand.m; sourceTree = "<group>"; };
 		586EAEE22446C9B800655F5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		586EAEE32446C9B800655F5C /* MEOCExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MEOCExtension.entitlements; sourceTree = "<group>"; };
+		AF69958826FD930800DB0413 /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				583AFC832446F3B10046FB4E /* Cocoa.framework in Frameworks */,
+				AF69958C26FD931000DB0413 /* XcodeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				586EAEDA2446C9B800655F5C /* Cocoa.framework in Frameworks */,
+				AF69958926FD930800DB0413 /* XcodeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +169,7 @@
 		580C32CF2446BE4B00A570BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF69958826FD930800DB0413 /* XcodeKit.framework */,
 				580C32D02446BE4B00A570BF /* Cocoa.framework */,
 			);
 			name = Frameworks;
@@ -207,6 +237,7 @@
 				583AFC7E2446F3B10046FB4E /* Sources */,
 				583AFC7F2446F3B10046FB4E /* Frameworks */,
 				583AFC802446F3B10046FB4E /* Resources */,
+				AF69958E26FD931000DB0413 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -224,6 +255,7 @@
 				586EAED52446C9B800655F5C /* Sources */,
 				586EAED62446C9B800655F5C /* Frameworks */,
 				586EAED72446C9B800655F5C /* Resources */,
+				AF69958B26FD930800DB0413 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -477,6 +509,7 @@
 				CODE_SIGN_ENTITLEMENTS = MEXcodeExtension/MEXcodeExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9RP82T9UKG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MEXcodeExtension/Info.plist;
@@ -484,6 +517,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MEXcodeExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -498,6 +532,7 @@
 				CODE_SIGN_ENTITLEMENTS = MEXcodeExtension/MEXcodeExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9RP82T9UKG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MEXcodeExtension/Info.plist;
@@ -505,6 +540,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MEXcodeExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -517,6 +553,7 @@
 				CODE_SIGN_ENTITLEMENTS = MESwiftExtension/MESwiftExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9RP82T9UKG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MESwiftExtension/Info.plist;
@@ -525,6 +562,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MEXcodeExtension.MESwiftExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -538,6 +576,7 @@
 				CODE_SIGN_ENTITLEMENTS = MESwiftExtension/MESwiftExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9RP82T9UKG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MESwiftExtension/Info.plist;
@@ -546,6 +585,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MEXcodeExtension.MESwiftExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -559,6 +599,7 @@
 				CODE_SIGN_ENTITLEMENTS = MEOCExtension/MEOCExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9RP82T9UKG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MEOCExtension/Info.plist;
@@ -567,6 +608,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MEXcodeExtension.MEOCExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -580,6 +622,7 @@
 				CODE_SIGN_ENTITLEMENTS = MEOCExtension/MEOCExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9RP82T9UKG;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MEOCExtension/Info.plist;
@@ -588,6 +631,7 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MEXcodeExtension.MEOCExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
