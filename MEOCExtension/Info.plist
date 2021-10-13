@@ -36,6 +36,14 @@
 					<key>XCSourceEditorCommandName</key>
 					<string>code format</string>
 				</dict>
+                <dict>
+                    <key>XCSourceEditorCommandClassName</key>
+                    <string>SourceEditorCommand</string>
+                    <key>XCSourceEditorCommandIdentifier</key>
+                    <string>$(PRODUCT_BUNDLE_IDENTIFIER).SourceEditorCommandSelectCodeFormat</string>
+                    <key>XCSourceEditorCommandName</key>
+                    <string>select code format</string>
+                </dict>
 				<dict>
 					<key>XCSourceEditorCommandClassName</key>
 					<string>SourceEditorCommand</string>

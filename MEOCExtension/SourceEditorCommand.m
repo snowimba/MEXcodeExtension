@@ -106,6 +106,53 @@
         [invocation.buffer.lines removeAllObjects];
         [invocation.buffer.lines addObjectsFromArray:lines];
         NSLog(@"outlines :: %@", outlines);
+    } else if ([invocation.commandIdentifier containsString:@"SourceEditorCommandSelectCodeFormat"]) {
+        NSMutableArray *lines = [NSMutableArray arrayWithArray:invocation.buffer.lines];
+        if (lines.count <= 0) {
+            completionHandler(nil);
+            return;
+        }
+
+        NSMutableArray *selections = invocation.buffer.selections;
+        XCSourceTextRange *range = selections.firstObject;
+        NSString *code = @"";
+        for (int i = 0; i <= (range.end.line - range.start.line); i++) {
+            if (i + range.start.line < lines.count + 1) {
+                NSString *string = lines[i + range.start.line];
+                code = [code stringByAppendingString:string];
+            }
+        }
+
+        // 创建任务，执行可执行文件
+        NSPipe *outputPipe = [NSPipe pipe];
+        NSPipe *errorPipe = [NSPipe pipe];
+
+        NSTask *task = [[NSTask alloc] init];
+        task.standardOutput = outputPipe;
+        task.standardError = errorPipe;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"clang-format" ofType:nil];
+        task.launchPath = path;
+
+        task.arguments = @[
+            @"-s", // sourceCode
+            code,
+            @"-l", // language
+            [self language:invocation.buffer],
+            @"-p",
+            @"/Users/nazimai/Desktop/work/third lib/MEXcodeExtension/MEOCExtension/.clang-format",
+        ];
+        
+        NSError *error;
+        [task launchAndReturnError:&error];
+        [task waitUntilExit];
+    
+        // clang-format输出的格式化代码,转化为NSSting，再根据换行符进行分割，替换buffer.lines中的内容即可
+        NSData *formatted = [outputPipe.fileHandleForReading readDataToEndOfFileAndReturnError:&error];
+        NSString *outlines = [[NSString alloc] initWithData:formatted encoding:NSUTF8StringEncoding];
+        NSArray *liness = [outlines componentsSeparatedByString:@"\n"];
+        [invocation.buffer.lines removeObjectsInRange:NSMakeRange(range.start.line, range.end.line)];
+        [invocation.buffer.lines insertObjects:liness atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(range.start.line, liness.count)]];
+        NSLog(@"select outlines :: %@", outlines);
     }
     completionHandler(nil);
 }
