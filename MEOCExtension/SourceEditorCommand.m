@@ -162,7 +162,7 @@
             [new_lines removeLastObject];
             liness = [new_lines copy];
         }
-        [invocation.buffer.lines removeObjectsInRange:NSMakeRange(range.start.line, range.end.line)];
+        [invocation.buffer.lines removeObjectsInRange:NSMakeRange(range.start.line, range.end.line - range.start.line + 1)];
         [invocation.buffer.lines insertObjects:liness atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(range.start.line, liness.count)]];
         NSLog(@"select outlines :: %@", outlines);
     }
