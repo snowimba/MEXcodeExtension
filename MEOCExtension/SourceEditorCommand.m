@@ -103,6 +103,12 @@
         NSData *formatted = [outputPipe.fileHandleForReading readDataToEndOfFileAndReturnError:&error];
         NSString *outlines = [[NSString alloc] initWithData:formatted encoding:NSUTF8StringEncoding];
         NSArray *lines = [outlines componentsSeparatedByString:@"\n"];
+        NSMutableArray *new_lines;
+        if ([lines.lastObject isEqualToString:@""]) {
+            new_lines = [NSMutableArray arrayWithArray:lines];
+            [new_lines removeLastObject];
+            lines = [new_lines copy];
+        }
         [invocation.buffer.lines removeAllObjects];
         [invocation.buffer.lines addObjectsFromArray:lines];
         NSLog(@"outlines :: %@", outlines);
@@ -150,6 +156,12 @@
         NSData *formatted = [outputPipe.fileHandleForReading readDataToEndOfFileAndReturnError:&error];
         NSString *outlines = [[NSString alloc] initWithData:formatted encoding:NSUTF8StringEncoding];
         NSArray *liness = [outlines componentsSeparatedByString:@"\n"];
+        NSMutableArray *new_lines;
+        if ([liness.lastObject isEqualToString:@""]) {
+            new_lines = [NSMutableArray arrayWithArray:liness];
+            [new_lines removeLastObject];
+            liness = [new_lines copy];
+        }
         [invocation.buffer.lines removeObjectsInRange:NSMakeRange(range.start.line, range.end.line)];
         [invocation.buffer.lines insertObjects:liness atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(range.start.line, liness.count)]];
         NSLog(@"select outlines :: %@", outlines);
