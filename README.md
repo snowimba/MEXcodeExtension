@@ -21,6 +21,10 @@ Xcode 的一些实用插件
 在 Xcode Editor 里面可以看到对应的插件。去 Xcode —> 偏好设置 —> key bindings 里面为插件设置快捷键，就可以实现一键操作了。
 
 ## 版本更新
+### 1.2（3）
+增加 code format 功能，可一键格式化代码。  
+**注意:** 格式化的设置内置在二进制文件 clang-format 中，由于不同团队规范不同，所以可能并不适用，需要重新编译 clang-format。
+
 ### 1.1（2）
 增加 XcodeKit 库，使 Editor 支持显示扩展功能
 

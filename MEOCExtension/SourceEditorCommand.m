@@ -74,8 +74,66 @@
                 }
             }
         }];
+    } else if ([invocation.commandIdentifier containsString:@"SourceEditorCommandCodeFormat"]) {
+        NSString *code = invocation.buffer.completeBuffer;
+        // 创建任务，执行可执行文件
+        NSPipe *outputPipe = [NSPipe pipe];
+        NSPipe *errorPipe = [NSPipe pipe];
+
+        NSTask *task = [[NSTask alloc] init];
+        task.standardOutput = outputPipe;
+        task.standardError = errorPipe;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"clang-format" ofType:nil];
+        task.launchPath = path;
+
+        task.arguments = @[
+            @"-s", // sourceCode
+            code,
+            @"-l", // language
+            [self language:invocation.buffer],
+            @"-p",
+            @"/Users/nazimai/Desktop/work/third lib/MEXcodeExtension/MEOCExtension/.clang-format",
+        ];
+        
+        NSError *error;
+        [task launchAndReturnError:&error];
+        [task waitUntilExit];
+    
+        // clang-format输出的格式化代码,转化为NSSting，再根据换行符进行分割，替换buffer.lines中的内容即可
+        NSData *formatted = [outputPipe.fileHandleForReading readDataToEndOfFileAndReturnError:&error];
+        NSString *outlines = [[NSString alloc] initWithData:formatted encoding:NSUTF8StringEncoding];
+        NSArray *lines = [outlines componentsSeparatedByString:@"\n"];
+        [invocation.buffer.lines removeAllObjects];
+        [invocation.buffer.lines addObjectsFromArray:lines];
+        NSLog(@"outlines :: %@", outlines);
     }
     completionHandler(nil);
 }
+
+- (NSString *)language:(XCSourceTextBuffer *)buffer {
+    CFStringRef uti = (__bridge CFStringRef)buffer.contentUTI;
+    if (UTTypeEqual(uti, kUTTypeCHeader)) {
+        // C header files could also be Objective-C. We attempt to detect typical Objective-C keywords.
+        for (NSString* line in buffer.lines) {
+            if ([line hasPrefix:@"#import"] || [line hasPrefix:@"@interface"] || [line hasPrefix:@"@protocol"] ||
+                [line hasPrefix:@"@property"] || [line hasPrefix:@"@end"]) {
+                return @"objc";
+            }
+        }
+    } else if (UTTypeEqual(uti, kUTTypeCPlusPlusHeader) || UTTypeEqual(uti, kUTTypeCPlusPlusSource) ||
+               UTTypeEqual(uti, kUTTypeCHeader) || UTTypeEqual(uti, kUTTypeCSource)) {
+        return @"cpp";
+    } else if (UTTypeEqual(uti, kUTTypeObjectiveCSource) ||
+               UTTypeEqual(uti, kUTTypeObjectiveCPlusPlusSource)) {
+        return @"objc";
+    } else if (UTTypeEqual(uti, kUTTypeJavaSource)) {
+        return @"java";
+    } else if (UTTypeEqual(uti, kUTTypeJavaScript)) {
+        return @"javascript";
+    }
+
+    return @"cpp";
+}
+
 
 @end
